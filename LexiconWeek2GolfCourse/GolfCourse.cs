@@ -4,27 +4,27 @@ using System.Text;
 
 namespace LexiconWeek2GolfCourse
 {
-    static class GolfCourse
+    public class GolfCourse
     {
 
-        public static string TooFarAwayFromGoalExceptionMessage = "Fail: The ball got too far away from the goal!";
-        public static string TooManySwingsExceptionMessage = "Fail: You made too many swings";
+        public string TooFarAwayFromGoalExceptionMessage = "Fail: The ball got too far away from the goal!";
+        public string TooManySwingsExceptionMessage = "Fail: You made too many swings";
 
-        public static int SetCupLocation(int minCupDistance, int maxCupDistance)
+        public int SetCupLocation(int minCupDistance, int maxCupDistance)
         {
             Random rng = new Random();
             
             return rng.Next(minCupDistance, maxCupDistance);
         }
 
-        public static void Display(int nrOfSwings, double distanceToCup, int maxNrOfSwings)
+        public void Display(int nrOfSwings, double distanceToCup, int maxNrOfSwings)
         {
             Console.WriteLine($"Number of swings made: {nrOfSwings}");
             Console.WriteLine($"Number of swings left: {maxNrOfSwings - nrOfSwings}");
             Console.WriteLine($"Distance to cup: {distanceToCup}");
         }
 
-        public static Swing UserSwings()
+        public Swing UserSwings()
         {
             Swing userSwing = new Swing();
             string input = "";
@@ -38,10 +38,10 @@ namespace LexiconWeek2GolfCourse
                 {
                     Console.Write($"Input {whatShouldBeInputted[index]}: ");
                     input = Console.ReadLine();
-                    userInput[index] = double.Parse(input);
+                    userInput[index] = ParseUserInput(input);
                     index++;
                 }
-                catch (FormatException)
+                catch (FormatException e)
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine($"Unable to parse {input} please try again with valid input!");
@@ -55,7 +55,12 @@ namespace LexiconWeek2GolfCourse
             return userSwing;
         }
 
-        public static double CalcTheSwing(Swing userSwing, double gravity)
+        public double ParseUserInput(string input)
+        {
+            return double.Parse(input ?? "");
+        }
+
+        public double CalcTheSwing(Swing userSwing, double gravity)
         {
             double angleInRadius = (Math.PI / 180) * userSwing.Angle;
 
@@ -64,7 +69,7 @@ namespace LexiconWeek2GolfCourse
             return distance;
         }
 
-        public static double NewDistanceToCup(double currentSwingDistance, double distanceToCup)
+        public double NewDistanceToCup(double currentSwingDistance, double distanceToCup)
         {
             double newDistance = distanceToCup - currentSwingDistance;
 
@@ -76,7 +81,7 @@ namespace LexiconWeek2GolfCourse
             return newDistance;
         }
 
-        public static void IsBallTooFarAway(double totalDistanceToCup, int maxDistanceeFfronGoal)
+        public void IsBallTooFarAway(double totalDistanceToCup, int maxDistanceeFfronGoal)
         {
             if (totalDistanceToCup > maxDistanceeFfronGoal)
             {
@@ -84,7 +89,7 @@ namespace LexiconWeek2GolfCourse
             }
         }
 
-        public static void HaveUserSwingedTooManyTimes(int nrOfSwings, int maxNrOfSwings)
+        public void HaveUserSwingedTooManyTimes(int nrOfSwings, int maxNrOfSwings)
         {
             if (nrOfSwings >= maxNrOfSwings)
             {
@@ -92,7 +97,7 @@ namespace LexiconWeek2GolfCourse
             }
         }
 
-        public static void UserWonDisplay(int nrOfSwings, double[] eachSwing)
+        public void UserWonDisplay(int nrOfSwings, double[] eachSwing)
         {
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.Green;

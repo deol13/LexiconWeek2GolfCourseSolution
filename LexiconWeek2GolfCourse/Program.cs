@@ -28,6 +28,7 @@ namespace LexiconWeek2GolfCourse
             //So the rest are local variables that needs to be sent from one method to another
             // GolfCourse gCourse = new GolfCourse();
             Swing userSwing = new Swing();
+            GolfCourse golfCourse = new GolfCourse();
             int nrOfSwings = 0;
             double[] distanceEachSwing = new double[MAXNROFSWINGS];
             bool continueToPlay = true;
@@ -35,8 +36,9 @@ namespace LexiconWeek2GolfCourse
 
 
 
-            double totalDistanceToCup = GolfCourse.SetCupLocation(MINCUPDISTANCE, MAXDISTANCEFROMGOAL);
+            double totalDistanceToCup = golfCourse.SetCupLocation(MINCUPDISTANCE, MAXDISTANCEFROMGOAL);
 
+            Console.ResetColor();
             //Starting message
             Console.WriteLine("Welcome to a golf game!\n"
                 + "In this golf game you are at the end of a course and know the distance to the goal.\n"
@@ -54,27 +56,27 @@ namespace LexiconWeek2GolfCourse
                 do
                 {
                     Console.Clear();
-                    GolfCourse.Display(nrOfSwings, totalDistanceToCup, MAXNROFSWINGS);
+                    golfCourse.Display(nrOfSwings, totalDistanceToCup, MAXNROFSWINGS);
 
-                    userSwing = GolfCourse.UserSwings();
+                    userSwing = golfCourse.UserSwings();
 
-                    latestSwingDistance = GolfCourse.CalcTheSwing(userSwing, GRAVITY);
+                    latestSwingDistance = golfCourse.CalcTheSwing(userSwing, GRAVITY);
 
                     distanceEachSwing[nrOfSwings] = latestSwingDistance;
 
-                    totalDistanceToCup = GolfCourse.NewDistanceToCup(latestSwingDistance, totalDistanceToCup);
+                    totalDistanceToCup = golfCourse.NewDistanceToCup(latestSwingDistance, totalDistanceToCup);
 
                     nrOfSwings++;
 
                     if (totalDistanceToCup == 0)
                     {
                         continueToPlay = false;
-                        GolfCourse.UserWonDisplay(nrOfSwings, distanceEachSwing);
+                        golfCourse.UserWonDisplay(nrOfSwings, distanceEachSwing);
                     }
                     else
                     {
-                        GolfCourse.IsBallTooFarAway(totalDistanceToCup, MAXDISTANCEFROMGOAL);
-                        GolfCourse.HaveUserSwingedTooManyTimes(nrOfSwings, MAXNROFSWINGS);
+                        golfCourse.IsBallTooFarAway(totalDistanceToCup, MAXDISTANCEFROMGOAL);
+                        golfCourse.HaveUserSwingedTooManyTimes(nrOfSwings, MAXNROFSWINGS);
                     }
 
                 } while (continueToPlay);
