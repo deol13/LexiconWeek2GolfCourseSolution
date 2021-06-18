@@ -34,8 +34,6 @@ namespace LexiconWeek2GolfCourse
             bool continueToPlay = true;
             double latestSwingDistance = 0;
 
-
-
             double totalDistanceToCup = golfCourse.SetCupLocation(MINCUPDISTANCE, MAXDISTANCEFROMGOAL);
 
             Console.ResetColor();
