@@ -2,6 +2,17 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using LexiconWeek2GolfCourse;
 using System;
 
+/// <summary>
+/// https://docs.microsoft.com/en-us/visualstudio/test/walkthrough-creating-and-running-unit-tests-for-managed-code?view=vs-2019
+/// Följde jag men kom ihåg när du skapar unit testern, ändra "Create new Solution" till "Add to Solution".
+/// Då kommer Unit testern addas till solutionen som står i "Location" som nu ska ha ändras till program du vill testa på om du 
+/// klickade på "add project" i projektet du vill testa 
+/// 
+/// I unit testern kommer du inte i åt Main method så ha inget du behöver unit testa där.
+/// Jag kom inte åt static klasser heller.
+/// Metoder som tar input från använder går inte bra att göra unit test på heller, så skapa mindre metoder med det du vill unit testa på
+/// </summary>
+
 namespace GolfCourseTest
 {
     [TestClass]
@@ -14,17 +25,19 @@ namespace GolfCourseTest
         {
             string angle = "g";
 
-            //Assert.ThrowsException<System.FormatException>(() => course.ParseUserInput(angle));
             try
             {
                 course.ParseUserInput(angle);
             }
             catch (System.FormatException e)
             {
+                //Checks if the exception message is the same as second argument aka the string "Input string was not in a correct format."
+                //If so then the method passes, if not then it shows the expected result wasn't achived aka the method tested on failed
                 StringAssert.Contains(e.Message, "Input string was not in a correct format.");
                 return;
             }
 
+            //In this kind of test method, we expect an exception so if the test method reaches here, this test failed.
             Assert.Fail("The expected exception was not thrown.");
         }
         [TestMethod]
@@ -32,7 +45,6 @@ namespace GolfCourseTest
         {
             string velocity = ".";
 
-            //Assert.ThrowsException<System.FormatException>(() => course.ParseUserInput(velocity));
             try
             {
                 course.ParseUserInput(velocity);
@@ -75,6 +87,7 @@ namespace GolfCourseTest
 
             double golfCourseCalcDistance = course.CalcTheSwing(swing, gravity);
 
+            //Checks so the result from the tested method is as expected
             Assert.AreEqual(distance, golfCourseCalcDistance);
         }
 
