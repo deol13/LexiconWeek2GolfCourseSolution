@@ -10,7 +10,7 @@ namespace GolfCourseTest
         public GolfCourse course = new GolfCourse();
 
         [TestMethod]
-        public void TestUserSwing_ShouldThrowFormatException_Letter()
+        public void UserSwing_ShouldThrowFormatException_Letter()
         {
             string angle = "g";
 
@@ -28,7 +28,7 @@ namespace GolfCourseTest
             Assert.Fail("The expected exception was not thrown.");
         }
         [TestMethod]
-        public void TestUserSwing_ShouldThrowFormatException_Symbol()
+        public void UserSwing_ShouldThrowFormatException_Symbol()
         {
             string velocity = ".";
 
@@ -46,7 +46,7 @@ namespace GolfCourseTest
             Assert.Fail("The expected exception was not thrown.");
         }
         [TestMethod]
-        public void TestUserSwing_Success()
+        public void UserSwing_Success()
         {
             string angle = "6";
             string velocity = "10";
@@ -63,7 +63,7 @@ namespace GolfCourseTest
         }
 
         [TestMethod]
-        public void Test_CalcTheSwing_ShouldReturnCorrectValue()
+        public void CalcTheSwing_ShouldReturnCorrectValue()
         {
             Swing swing = new Swing();
             swing.Angle = 45;
