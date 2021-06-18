@@ -9,6 +9,7 @@ namespace GolfCourseTest
     {
         public GolfCourse course = new GolfCourse();
 
+        /*
         [TestMethod]
         public void UserSwing_ShouldThrowFormatException_Letter()
         {
@@ -103,6 +104,65 @@ namespace GolfCourseTest
             double golfCourseNewDistance = course.NewDistanceToCup(currentSwingDistance, distanceToCup);
 
             Assert.AreEqual(newDistance, golfCourseNewDistance);
+        }
+        */
+
+        [TestMethod]
+        public void IsBallTooFarAway_DoNotThrowException()
+        {
+            try
+            {
+                course.IsBallTooFarAway(400, 500);
+            }
+            catch (MyCustomException e)
+            {
+                StringAssert.Contains(e.Message, course.TooFarAwayFromGoalExceptionMessage);
+                return;
+            }
+        }
+        [TestMethod]
+        public void IsBallTooFarAway_DoThrowException()
+        {
+            try
+            {
+                course.IsBallTooFarAway(500, 400);
+            }
+            catch (MyCustomException e)
+            {
+                StringAssert.Contains(e.Message, course.TooFarAwayFromGoalExceptionMessage);
+                return;
+            }
+
+            Assert.Fail("The expected exception was not thrown.");
+        }
+        
+        [TestMethod]
+        public void HaveUserSwingedTooManyTimes_DoNotThrowException()
+        {
+            try
+            {
+                course.HaveUserSwingedTooManyTimes(5, 10);
+            }
+            catch (MyCustomException e)
+            {
+                StringAssert.Contains(e.Message, course.TooManySwingsExceptionMessage);
+                return;
+            }
+        }
+        [TestMethod]
+        public void HaveUserSwingedTooManyTimes_DoThrowException()
+        {
+            try
+            {
+                course.HaveUserSwingedTooManyTimes(10, 10);
+            }
+            catch (MyCustomException e)
+            {
+                StringAssert.Contains(e.Message, course.TooManySwingsExceptionMessage);
+                return;
+            }
+
+            Assert.Fail("The expected exception was not thrown.");
         }
 
     }

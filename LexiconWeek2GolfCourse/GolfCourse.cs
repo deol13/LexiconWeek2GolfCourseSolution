@@ -81,9 +81,9 @@ namespace LexiconWeek2GolfCourse
             return newDistance;
         }
 
-        public void IsBallTooFarAway(double totalDistanceToCup, int maxDistanceeFfronGoal)
+        public void IsBallTooFarAway(double totalDistanceToCup, int maxDistanceeFronGoal)
         {
-            if (totalDistanceToCup > maxDistanceeFfronGoal)
+            if (totalDistanceToCup > maxDistanceeFronGoal)
             {
                 throw new MyCustomException(TooFarAwayFromGoalExceptionMessage);
             }
