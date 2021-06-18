@@ -9,7 +9,6 @@ namespace GolfCourseTest
     {
         public GolfCourse course = new GolfCourse();
 
-        /*
         [TestMethod]
         public void UserSwing_ShouldThrowFormatException_Letter()
         {
@@ -105,7 +104,6 @@ namespace GolfCourseTest
 
             Assert.AreEqual(newDistance, golfCourseNewDistance);
         }
-        */
 
         [TestMethod]
         public void IsBallTooFarAway_DoNotThrowException()
