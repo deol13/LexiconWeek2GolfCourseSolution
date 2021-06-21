@@ -13,46 +13,14 @@ namespace LexiconWeek2GolfCourse
         public int SetCupLocation(int minCupDistance, int maxCupDistance)
         {
             Random rng = new Random();
-            
+
             return rng.Next(minCupDistance, maxCupDistance);
         }
-
-        public void Display(int nrOfSwings, double distanceToCup, int maxNrOfSwings)
+        
+        public string Display(int nrOfSwings, double distanceToCup, int maxNrOfSwings)
         {
-            Console.WriteLine($"Number of swings made: {nrOfSwings}");
-            Console.WriteLine($"Number of swings left: {maxNrOfSwings - nrOfSwings}");
-            Console.WriteLine($"Distance to cup: {distanceToCup}");
-        }
-
-        public Swing UserSwings()
-        {
-            Swing userSwing = new Swing();
-            string input = "";
-            string[] whatShouldBeInputted = new string[2] { "angle", "velocity(m/s)" };
-            double[] userInput = new double[2];
-            int index = 0;
-
-            while (index < 2)
-            {
-                try
-                {
-                    Console.Write($"Input {whatShouldBeInputted[index]}: ");
-                    input = Console.ReadLine();
-                    userInput[index] = ParseUserInput(input);
-                    index++;
-                }
-                catch (FormatException e)
-                {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine($"Unable to parse {input} please try again with valid input!");
-                    Console.ResetColor();
-                }
-            }
-
-            userSwing.Angle = userInput[0];
-            userSwing.Velocity = userInput[1];
-
-            return userSwing;
+            string output = $"Number of swings made: {nrOfSwings}\nNumber of swings left: {maxNrOfSwings - nrOfSwings}\nDistance to cup: {distanceToCup}";
+            return output;
         }
 
         public double ParseUserInput(string input)
@@ -97,19 +65,16 @@ namespace LexiconWeek2GolfCourse
             }
         }
 
-        public void UserWonDisplay(int nrOfSwings, double[] eachSwing)
+        public string UserWonDisplay(int nrOfSwings, double[] eachSwing)
         {
-            Console.Clear();
-            Console.ForegroundColor = ConsoleColor.Green;
-
-            Console.WriteLine("Congratulations you won, here's all your swings:");
+            string output = "Congratulations you won, here's all your swings:\n";
 
             for (int i = 0; i < nrOfSwings; i++)
             {
-                Console.WriteLine($"Swing {i + 1}: {eachSwing[i]}");
+                output = output + ($"Swing {i + 1}: {eachSwing[i]}\n");
             }
 
-            Console.ResetColor();
+            return output;
         }
     }
 }

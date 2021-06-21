@@ -54,9 +54,21 @@ namespace LexiconWeek2GolfCourse
                 do
                 {
                     Console.Clear();
-                    golfCourse.Display(nrOfSwings, totalDistanceToCup, MAXNROFSWINGS);
+                    Console.WriteLine(golfCourse.Display(nrOfSwings, totalDistanceToCup, MAXNROFSWINGS));
 
-                    userSwing = golfCourse.UserSwings();
+                    string whatsBeingAsked = "angle";
+                    try
+                    {
+                        userSwing.Angle = UserSwings("angle");
+                        whatsBeingAsked = "velocity";
+                        userSwing.Velocity = UserSwings("velocity");
+                    }
+                    catch (FormatException e)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine($"Unable to parse {whatsBeingAsked} please try again with valid input!");
+                        Console.ResetColor();
+                    }
 
                     latestSwingDistance = golfCourse.CalcTheSwing(userSwing, GRAVITY);
 
@@ -66,18 +78,14 @@ namespace LexiconWeek2GolfCourse
 
                     nrOfSwings++;
 
-                    if (totalDistanceToCup == 0)
-                    {
-                        continueToPlay = false;
-                        golfCourse.UserWonDisplay(nrOfSwings, distanceEachSwing);
-                    }
-                    else
-                    {
-                        golfCourse.IsBallTooFarAway(totalDistanceToCup, MAXDISTANCEFROMGOAL);
-                        golfCourse.HaveUserSwingedTooManyTimes(nrOfSwings, MAXNROFSWINGS);
-                    }
+                    continueToPlay = CheckIfUserWon(totalDistanceToCup, golfCourse, nrOfSwings, distanceEachSwing);
 
                 } while (continueToPlay);
+                Console.Clear();
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine(golfCourse.UserWonDisplay(nrOfSwings, distanceEachSwing));
+                Console.ResetColor();
+
             }
             catch (MyCustomException e)
             {
@@ -86,6 +94,34 @@ namespace LexiconWeek2GolfCourse
                 Console.WriteLine(e.Message);
                 Console.ResetColor();
             }
+        }
+
+        public static double UserSwings(string whatShouldBeAsked)
+        {
+            Console.Write($"Input {whatShouldBeAsked}: ");
+            string input = Console.ReadLine();
+            double parsedInput;
+            double.TryParse(input, out parsedInput);
+
+            return parsedInput;
+        }
+
+        public static bool CheckIfUserWon(double totalDistanceToCup, GolfCourse golfCourse, int nrOfSwings, double[] distanceEachSwing)
+        {
+            bool continueToPlay = true;
+
+            // Assert.Equal(expected, result, 3); Try using this overloaded version with precision
+            if (totalDistanceToCup == 0)
+            {
+                continueToPlay = false;
+            }
+            else
+            {
+                golfCourse.IsBallTooFarAway(totalDistanceToCup, MAXDISTANCEFROMGOAL);
+                golfCourse.HaveUserSwingedTooManyTimes(nrOfSwings, MAXNROFSWINGS);
+            }
+
+            return continueToPlay;
         }
     }
 }

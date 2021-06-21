@@ -21,60 +21,6 @@ namespace GolfCourseTest
         public GolfCourse course = new GolfCourse();
 
         [TestMethod]
-        public void UserSwing_ShouldThrowFormatException_Letter()
-        {
-            string angle = "g";
-
-            try
-            {
-                course.ParseUserInput(angle);
-            }
-            catch (System.FormatException e)
-            {
-                //Checks if the exception message is the same as second argument aka the string "Input string was not in a correct format."
-                //If so then the method passes, if not then it shows the expected result wasn't achived aka the method tested on failed
-                StringAssert.Contains(e.Message, "Input string was not in a correct format.");
-                return;
-            }
-
-            //In this kind of test method, we expect an exception so if the test method reaches here, this test failed.
-            Assert.Fail("The expected exception was not thrown.");
-        }
-        [TestMethod]
-        public void UserSwing_ShouldThrowFormatException_Symbol()
-        {
-            string velocity = ".";
-
-            try
-            {
-                course.ParseUserInput(velocity);
-            }
-            catch (System.FormatException e)
-            {
-                StringAssert.Contains(e.Message, "Input string was not in a correct format.");
-                return;
-            }
-
-            Assert.Fail("The expected exception was not thrown.");
-        }
-        [TestMethod]
-        public void UserSwing_Success()
-        {
-            string angle = "6";
-            string velocity = "10";
-
-            try
-            {
-                course.ParseUserInput(angle);
-                course.ParseUserInput(velocity);
-            }
-            catch (System.FormatException e)
-            {
-                StringAssert.Contains(e.Message, "Input string was not in a correct format.");
-            }
-        }
-
-        [TestMethod]
         public void CalcTheSwing_ShouldReturnCorrectValue()
         {
             Swing swing = new Swing();
