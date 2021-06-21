@@ -23,11 +23,6 @@ namespace LexiconWeek2GolfCourse
             return output;
         }
 
-        public double ParseUserInput(string input)
-        {
-            return double.Parse(input ?? "");
-        }
-
         public double CalcTheSwing(Swing userSwing, double gravity)
         {
             double angleInRadius = (Math.PI / 180) * userSwing.Angle;

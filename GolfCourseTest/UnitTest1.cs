@@ -122,5 +122,32 @@ namespace GolfCourseTest
             Assert.Fail("The expected exception was not thrown.");
         }
 
+        [TestMethod]
+        public void CheckIfUserWon_InMainMethod_Won()
+        {
+            double totalDistanceToCup = 0;
+            GolfCourse golfCourse = new GolfCourse();
+            int nrOfSwings = 5;
+            double[] distanceEachSwing = new double[] { 1, 2, 3, 4, 5};
+
+            bool result = Program.CheckIfUserWon(totalDistanceToCup, golfCourse, nrOfSwings, distanceEachSwing);
+            bool expectedResult = false;
+
+            Assert.AreEqual(expectedResult, result);
+        }
+        [TestMethod]
+        public void CheckIfUserWon_InMainMethod_didNotWin()
+        {
+            double totalDistanceToCup = 1;
+            GolfCourse golfCourse = new GolfCourse();
+            int nrOfSwings = 5;
+            double[] distanceEachSwing = new double[] { 1, 2, 3, 4, 5 };
+
+            bool result = Program.CheckIfUserWon(totalDistanceToCup, golfCourse, nrOfSwings, distanceEachSwing);
+            bool expectedResult = true;
+
+            Assert.AreEqual(expectedResult, result);
+        }
+
     }
 }

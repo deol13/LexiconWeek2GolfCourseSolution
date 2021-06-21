@@ -2,7 +2,7 @@
 
 namespace LexiconWeek2GolfCourse
 {
-    class Program
+    public class Program
     {
         //I don't like setting variables that can and should be changed as "Global" in
         //this can of program where the entire program is in one class.
