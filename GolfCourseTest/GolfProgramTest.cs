@@ -16,12 +16,12 @@ using System;
 namespace GolfCourseTest
 {
     [TestClass]
-    public class UnitTest1
+    public class GolfProgramTest
     {
         public GolfCourse course = new GolfCourse();
 
         [TestMethod]
-        public void CalcTheSwing_ShouldReturnCorrectValue()
+        public void CalcTheSwingTest_CorrectValue()
         {
             Swing swing = new Swing();
             swing.Angle = 45;
@@ -38,7 +38,7 @@ namespace GolfCourseTest
         }
 
         [TestMethod]
-        public void NewDistanceToCup_ShouldReturnRightNewDistance()
+        public void NewDistanceToCupTest_ValidNewDistance()
         {
             double distanceToCup = 57.5;
             double currentSwingDistance = 42.9;
@@ -50,7 +50,7 @@ namespace GolfCourseTest
             Assert.AreEqual(newDistance, golfCourseNewDistance);
         }
         [TestMethod]
-        public void NewDistanceToCup_ResultNegativ_ShouldStillReturnPositiv()
+        public void NewDistanceToCupTest_CalcNegativDistance_ReturnPositiv()
         {
             double distanceToCup = 57.5;
             double currentSwingDistance = 70;
@@ -65,7 +65,7 @@ namespace GolfCourseTest
         }
 
         [TestMethod]
-        public void IsBallTooFarAway_DoNotThrowException()
+        public void IsBallTooFarAwayTest_NoThrowException()
         {
             try
             {
@@ -78,7 +78,7 @@ namespace GolfCourseTest
             }
         }
         [TestMethod]
-        public void IsBallTooFarAway_DoThrowException()
+        public void IsBallTooFarAwayTest_ThrowException()
         {
             try
             {
@@ -94,7 +94,7 @@ namespace GolfCourseTest
         }
         
         [TestMethod]
-        public void HaveUserSwingedTooManyTimes_DoNotThrowException()
+        public void HaveUserSwingedTooManyTimesTest_NoThrowException()
         {
             try
             {
@@ -107,7 +107,7 @@ namespace GolfCourseTest
             }
         }
         [TestMethod]
-        public void HaveUserSwingedTooManyTimes_DoThrowException()
+        public void HaveUserSwingedTooManyTimesTest_ThrowException()
         {
             try
             {
@@ -123,27 +123,27 @@ namespace GolfCourseTest
         }
 
         [TestMethod]
-        public void CheckIfUserWon_InMainMethod_Won()
+        public void GolfProgram_CheckIfUserWonTest_Won()
         {
             double totalDistanceToCup = 0;
             GolfCourse golfCourse = new GolfCourse();
             int nrOfSwings = 5;
             double[] distanceEachSwing = new double[] { 1, 2, 3, 4, 5};
 
-            bool result = Program.CheckIfUserWon(totalDistanceToCup, golfCourse, nrOfSwings, distanceEachSwing);
+            bool result = GolfProgram.CheckIfUserWon(totalDistanceToCup, golfCourse, nrOfSwings, distanceEachSwing);
             bool expectedResult = false;
 
             Assert.AreEqual(expectedResult, result);
         }
         [TestMethod]
-        public void CheckIfUserWon_InMainMethod_didNotWin()
+        public void GolfProgram_CheckIfUserWonTest_didNotWin()
         {
             double totalDistanceToCup = 1;
             GolfCourse golfCourse = new GolfCourse();
             int nrOfSwings = 5;
             double[] distanceEachSwing = new double[] { 1, 2, 3, 4, 5 };
 
-            bool result = Program.CheckIfUserWon(totalDistanceToCup, golfCourse, nrOfSwings, distanceEachSwing);
+            bool result = GolfProgram.CheckIfUserWon(totalDistanceToCup, golfCourse, nrOfSwings, distanceEachSwing);
             bool expectedResult = true;
 
             Assert.AreEqual(expectedResult, result);
